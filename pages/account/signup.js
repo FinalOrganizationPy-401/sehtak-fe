@@ -10,7 +10,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 
 export default function Signup() {
-    
+
     // form validation rules 
     const validationSchema = Yup.object().shape({
         email: Yup.string()
@@ -33,7 +33,7 @@ export default function Signup() {
     const { signup } = useAuth();
     const router = useRouter();
 
-   async function handleSignup(data) {
+    async function handleSignup(data) {
         let userInput = {
             email: data.email,
             password: data.password
@@ -43,69 +43,69 @@ export default function Signup() {
     }
     return (
         <>
-        <div className='backGroundCoverImage'>
-            <div className='flex h-20 py-3 bg-gradient-to-r from-teal-100 to-teal-50 pl-14'> 
-                <Image src="/images/logo.png" width={140} height={30} className='ml-3'/> 
-            </div>
-            
-            <main className='pl-8'>                    
-                    <div class="bg-grey-lighter min-h-screen flex flex-col">
-                    <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-1">
-                        <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-                        <form onSubmit={handleSubmit(handleSignup)}>
-                            <h1 class="mb-8 text-3xl text-center">Sign up</h1>
-                            <div className="text-red-600">{errors.email?.message}</div>
-                            <input
-                                {...register('email')} className={`form-control ${errors.email ? 'is-invalid' : ''}`+"block border border-grey-light w-full p-3 rounded mb-3"}
-                                type="text"
-                                name="email"
-                                placeholder="Email" />
-                            
-                            <div className="text-red-600">{errors.password?.message}</div>
-                            <input 
-                                {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}`+"block border border-grey-light w-full p-3 rounded mb-3"} 
-                                type="password"
-                                name="password"
-                                placeholder="Password" />
-                                
-                            <div className="text-red-600">{errors.confirmPassword?.message}</div>
-                            <input 
-                                {...register('confirmPassword')} className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''}`+"block border border-grey-light w-full p-3 rounded mb-3"}
-                                type="password"
-                                
-                                name="confirmPassword"
-                                placeholder="Confirm Password" />
-                                                      
+            <div className='backGroundCoverImage'>
+                <div className='flex h-20 py-3 bg-gradient-to-r from-teal-100 to-teal-50 pl-14'>
+                    <Image src="/images/logo.png" width={140} height={30} className='ml-3' />
+                </div>
 
-                            <button
-                                type="submit"
-                                class="w-full text-center py-3 rounded bg-blue-500 text-white hover:bg-blue-600 focus:outline-none my-1"
-                            >Create Account</button>
+                <main className='pl-8'>
+                    <div className="bg-grey-lighter min-h-screen flex flex-col">
+                        <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-1">
+                            <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
+                                <form onSubmit={handleSubmit(handleSignup)}>
+                                    <h1 className="mb-8 text-3xl text-center">Sign up</h1>
+                                    <div className="text-red-600">{errors.email?.message}</div>
+                                    <input
+                                        {...register('email')} className={`form-control ${errors.email ? 'is-invalid' : ''}` + "block border border-grey-light w-full p-3 rounded mb-3"}
+                                        type="text"
+                                        name="email"
+                                        placeholder="Email" />
 
-                            <div class="text-center text-sm text-grey-dark mt-4">
-                                By signing up, you agree to the 
-                                <a class="no-underline border-b border-grey-dark text-grey-dark" href="#">
-                                    Terms of Service
-                                </a> and 
-                                <a class="no-underline border-b border-grey-dark text-grey-dark" href="#">
-                                    Privacy Policy
-                                </a>
+                                    <div className="text-red-600">{errors.password?.message}</div>
+                                    <input
+                                        {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}` + "block border border-grey-light w-full p-3 rounded mb-3"}
+                                        type="password"
+                                        name="password"
+                                        placeholder="Password" />
+
+                                    <div className="text-red-600">{errors.confirmPassword?.message}</div>
+                                    <input
+                                        {...register('confirmPassword')} className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''}` + "block border border-grey-light w-full p-3 rounded mb-3"}
+                                        type="password"
+
+                                        name="confirmPassword"
+                                        placeholder="Confirm Password" />
+
+
+                                    <button
+                                        type="submit"
+                                        className="w-full text-center py-3 rounded bg-blue-500 text-white hover:bg-blue-600 focus:outline-none my-1"
+                                    >Create Account</button>
+
+                                    <div className="text-center text-sm text-grey-dark mt-4">
+                                        By signing up, you agree to the
+                                        <a className="no-underline border-b border-grey-dark text-grey-dark" href="#">
+                                            Terms of Service
+                                        </a> and
+                                        <a className="no-underline border-b border-grey-dark text-grey-dark" href="#">
+                                            Privacy Policy
+                                        </a>
+                                    </div>
+                                </form>
                             </div>
-                        </form>
-                        </div>
-                        <div class="text-grey-dark mt-6">
-                            Already have an account? 
-                            <a class="no-underline border-b border-blue text-blue" href="login">
-                                Log in
-                            </a>.
+                            <div className="text-grey-dark mt-6">
+                                Already have an account?
+                                <a className="no-underline border-b border-blue text-blue" href="login">
+                                    Log in
+                                </a>.
+                            </div>
                         </div>
                     </div>
-                </div>
-        
-            
-            </main>
 
-        </div>
+
+                </main>
+
+            </div>
         </>
     )
 }

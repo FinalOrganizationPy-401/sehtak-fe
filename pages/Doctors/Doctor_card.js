@@ -17,33 +17,33 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 export default function Doctor_card() {
-    
-    const CreateVisitURL = "https://sehtak.herokuapp.com/api/v1/visits/create/"
-    
-    const router = useRouter();
-    const {id} = router.query
 
-    const [centerCard,setCenterCard] = useState({});
+    const CreateVisitURL = "https://sehtak.herokuapp.com/api/v1/visits/create/"
+
+    const router = useRouter();
+    const { id } = router.query
+
+    const [centerCard, setCenterCard] = useState({});
     const [locLoad, isLocLoad] = useState(false)
 
     const getCenterCard = async () => {
-        try{
+        try {
             const response = await axios.get(`https://sehtak.herokuapp.com/doctors/profile/${id}`);
             setCenterCard(response.data);
             console.log(centerData)
-        } 
-        catch(error){
+        }
+        catch (error) {
             console.log(error)
         }
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         getCenterCard();
-    },{})
+    }, {})
 
-    
 
-    function split_loc(){
+
+    function split_loc() {
         const location_arr = centerCard.location.split(',')
         return location_arr
     }
@@ -55,23 +55,23 @@ export default function Doctor_card() {
     //     ifameData.src=`https://maps.google.com/maps?q=${lat},${lon}&hl=es;&output=embed`
     // },[])
 
-    
-    async function CreateVisit(){
+
+    async function CreateVisit() {
         NProgress.start()
         const config = {
-          headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem("AuthTokens")).access}` }
+            headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem("AuthTokens")).access}` }
         };
         let accessData = null
-        let patientID =null
+        let patientID = null
         let doctorID = null
-        
+
         if (typeof window !== 'undefined') {
-        accessData = JSON.parse(localStorage.getItem("AuthTokens")).access
-        patientID = jwt_decode(accessData).info_id
-        doctorID = centerCard.id
-        }    
+            accessData = JSON.parse(localStorage.getItem("AuthTokens")).access
+            patientID = jwt_decode(accessData).info_id
+            doctorID = centerCard.id
+        }
         const ses = CreateVisitURL
-        const userInput ={
+        const userInput = {
             "description": "",
             "medicine": "",
             "medicine_status": false,
@@ -83,24 +83,24 @@ export default function Doctor_card() {
             "doctor": doctorID
         }
         try {
-          const res = await axios.post(ses, userInput, config);
-    
-          if (res.status === 400) {
-            console.log(`${res.status} bad request`)
-            NProgress.done()
-          }
-          if (res.status === 201 || res.status === 200) {
-            router.push('/account/vistisInfo?visitAdded=added');
-          }
+            const res = await axios.post(ses, userInput, config);
+
+            if (res.status === 400) {
+                console.log(`${res.status} bad request`)
+                NProgress.done()
+            }
+            if (res.status === 201 || res.status === 200) {
+                router.push('/account/vistisInfo?visitAdded=added');
+            }
         }
         catch (error) {
-          console.log(` Error Signing in: ${error}`)
-          NProgress.done()
+            console.log(` Error Signing in: ${error}`)
+            NProgress.done()
         }
-    } 
+    }
 
 
-    
+
     return (
         <>
             <Navbar />
@@ -114,7 +114,7 @@ export default function Doctor_card() {
                     <p className={styles.title}><span><FontAwesomeIcon icon={faPhone} /></span> {centerCard.phone}</p>
                     <p className={styles.title}><span><FontAwesomeIcon icon={faMapLocationDot} /> Location</span></p>
                     {/* <p>{typeof(centerCard.location)}</p> */}
-                    <iframe id='iframeId' height="300px" width="140%"></iframe>
+                    <iframe id='iframeId' height="300px" width="140%" title="doctor location "></iframe>
                 </div>
                 <div>
                     <button onClick={CreateVisit} className={styles.visitButton}> Visit</button>
