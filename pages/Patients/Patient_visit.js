@@ -19,12 +19,13 @@ import Footer from '../../components/Footer';
 
 
 export default function Patient_visit() {
-    
-    const router = useRouter();
-    const {visitId} = router.query
-    let token = null
 
-    const api = 'https://sehtak.herokuapp.com/api/v1/visits/'+visitId+"/"; 
+    const router = useRouter();
+    
+    
+   
+    
+    let token = null
     if (typeof window !== 'undefined') {
         token = JSON.parse(localStorage.getItem("AuthTokens")).access
     }
@@ -32,7 +33,14 @@ export default function Patient_visit() {
 
    useEffect(() => {
 async function getProfileInfo() {
+    let api = null
      NProgress.start()
+     if (router.isReady) {
+        // Code using query
+        const {visitId} = router.query
+        api = 'https://sehtak.herokuapp.com/api/v1/visits/'+visitId+"/";
+      }
+     
        await axios.get(api, {
             headers: {
             Authorization: `Bearer ${token}`
@@ -49,11 +57,11 @@ async function getProfileInfo() {
             NProgress.done()
         })
        
-    }
+    ,[] }
     
     getProfileInfo()
 
-   }, []);
+   }, [router.isReady]);
 
 // {visitData.doctor.name}
 // {visitData.doctor.phone}
@@ -131,8 +139,8 @@ async function getProfileInfo() {
                         <button className={styles.buttonClose}>Close Visit</button>
                     </div>
                 </div>
-                <Footer/>
             </div>
+                <Footer/>
             </>
             }
         </>
