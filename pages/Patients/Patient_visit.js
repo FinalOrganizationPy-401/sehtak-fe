@@ -87,7 +87,8 @@ async function getProfileInfo() {
             <> 
             <div className={styles.vHeader}>
                 <div>
-                    <h1 className={styles.title}>Visit - Visit Date</h1>
+                    <p className={styles.title}>Visit - Visit Date</p>
+                    <p className={styles.title}>{visitData.created_at}</p>
                 </div>
                 <div className={styles.title}>
                     <p> Dr. {visitData.doctor.name}</p>
