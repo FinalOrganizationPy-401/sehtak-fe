@@ -12,61 +12,46 @@ import { faPhone, faMapLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
-export default function Doctor_card() {
+export default function Pharmacies_card() {
 
     const router = useRouter();
-    const {id} = router.query
+    const { id } = router.query
 
-    const [centerCard,setCenterCard] = useState({});
+    const [centerCard, setCenterCard] = useState({});
+    const [visible, setVisibility] = useState('invisible');
 
     const [lat, setLat] = useState(null)
     const [lon, setLon] = useState(null)
 
 
     const getCenterCard = async () => {
-        try{
+        try {
             const response = await axios.get(`https://sehtak.herokuapp.com/pharmacist/profile/${id}`);
             setCenterCard(response.data);
-            console.log(centerData)
-        } 
-        catch(error){
+            if (response.status === 200) {
+                const location_arr = await response.data.location.split(',')
+                setLat(location_arr[0])
+                setLon(location_arr[1])
+            }
+        }
+        catch (error) {
             console.log(error)
         }
     }
 
 
 
-    const split_loc = async () =>{
-        try{
-        const location_arr = await centerCard.location.split(',')
-        setLat(location_arr[0])
-        setLon(location_arr[1])
-        const ifameData = document.getElementById("iframeId")
-        // const lat= location_arr[0];
-        // const lon= location_arr[1];
-        ifameData.src=`https://maps.google.com/maps?q=${lat},${lon}&hl=es;&output=embed`
-        }
-        catch(e){
-            console.log(e)
-        }
+    useEffect(() => {
+        getCenterCard();
+    }, [])
 
-        // return location_arr
+    const handleVisiblity = () => {
+        setVisibility('visible');
+        const ifameData = document.getElementById("iframeId")
+        ifameData.src = `https://maps.google.com/maps?q=${lat},${lon}&hl=es;&output=embed`
     }
 
-    useEffect(()=>{
-        getCenterCard();
-        split_loc();
-    })
 
-    // useEffect(()=>{
-    //     // const ifameData = document.getElementById("iframeId")
-    //     // const lat= location_arr[0];
-    //     // const lon= location_arr[1];
-    //     // // console.log(lat,lon)
-    //     // // const lat= 30.545455;
-    //     // // const lon= 35.0000000;
-    //     // ifameData.src=`https://maps.google.com/maps?q=${lat},${lon}&hl=es;&output=embed`
-    // },{})
     return (
         <>
             <Navbar />
@@ -78,9 +63,14 @@ export default function Doctor_card() {
                 <div>
                     <p className={styles.title}> {centerCard.name}</p>
                     <p className={styles.title}><span><FontAwesomeIcon icon={faPhone} /></span> {centerCard.phone}</p>
-                    <p className={styles.title}><span><FontAwesomeIcon icon={faMapLocationDot} /> Location</span></p>
-                    {/* <p>{typeof(centerCard.location)}</p> */}
-                    <iframe id='iframeId' height="300px" width="140%"></iframe>
+                    <p className={styles.title}>
+                        <button onClick={handleVisiblity}>
+                            <span><FontAwesomeIcon icon={faMapLocationDot} /> View Location</span>
+
+                        </button>
+                    </p>
+                    <iframe className={`${visible}`} id='iframeId' height="300px" width="140%" title='doctor location'></iframe>
+
                 </div>
                 <div>
                     {/* <button className={styles.visitButton}> Visit</button> */}
