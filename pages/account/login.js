@@ -47,7 +47,7 @@ export default function Login() {
 
 
             <section className="h-screen">
-                <div className="h-full px-6 text-gray-800">
+                <div className="h-full text-gray-800">
                     <div className='flex h-20 py-3 pl-12 bg-gradient-to-r from-teal-100 to-teal-50'>
                         <Image src="/images/logo.png" width={140} height={30} className='ml-3' />
                     </div>
@@ -98,6 +98,7 @@ export default function Login() {
 
                                 <div className="text-center lg:text-left">
                                     <button
+                                        id='loginButton'
                                         type="submit"
                                         className="inline-block py-3 text-sm font-medium leading-snug text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded shadow-md px-7 hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg"
                                     >
