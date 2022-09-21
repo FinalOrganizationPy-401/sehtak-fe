@@ -20,11 +20,7 @@ export default function Navbar() {
     const { isAuth, logout } = useAuth();
     
     const router = useRouter();
-    let isLoggedIn = false
-   async function checkingIsLog(){
-        isLoggedIn = await isAuth()
-   }
-   checkingIsLog()
+    const isLoggedIn = isAuth()
 
     function handleLogout(e) {
         e.preventDefault();
