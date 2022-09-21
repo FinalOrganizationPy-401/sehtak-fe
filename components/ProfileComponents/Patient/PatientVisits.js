@@ -109,7 +109,7 @@ async function getProfileInfo() {
                     </td>
                     <td className="px-6 py-4">
                     {
-                        visit.visit_status == true  ?  <span className='p-2 text-black bg-green-400 rounded-md' >Opened</span>:<span className='p-2 text-black bg-gray-400 rounded-md' >Closed</span>
+                        visit.visit_status == true  ?  <span className='p-2 text-white bg-green-400 rounded-md' >Opened</span>:<span className='p-2 text-black bg-gray-400 rounded-md' >Closed</span>
                     }
                        
                         

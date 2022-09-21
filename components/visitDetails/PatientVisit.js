@@ -62,7 +62,7 @@ export default function PatientVisit({ visitData }) {
             <> 
             <div className={styles.vHeader}>
                 <div>
-                    <p className={styles.title}>Visit - Visit Date</p>
+                    <p className={styles.title}>Visit Date</p>
                     <p className={styles.title}>{visitData.created_at}</p>
                 </div>
                 <div className={styles.title}>
