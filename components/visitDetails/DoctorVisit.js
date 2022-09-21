@@ -97,7 +97,7 @@ export default function DoctorVisit({ visitData }) {
             <> 
             <div className={styles.vHeader}>
                 <div>
-                    <p className={styles.title}>Visit - Visit Date</p>
+                    <p className={styles.title}>Visit Date</p>
                     <p className={styles.title}>{visitData.created_at}</p>
                 </div>
                 <div className={styles.title}>
@@ -115,12 +115,12 @@ export default function DoctorVisit({ visitData }) {
                 <div className={styles.components}>
                     <div className={styles.desc}>
                         <label for="message" class="block mb-2 text-md font-medium text-gray-900 dark:text-gray-400 " >Description</label>
-                        <textarea id="message" rows="6" name='description' class="block p-2.5 w-full text-lg text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Please Dr. leave your comments here..." >{visitData.description? visitData.description : "there is no description provided yet"}</textarea>
+                        <textarea id="message" rows="6" name='description' class="block p-2.5 w-full text-lg text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Please Dr. leave your comments here..." >{visitData.description? visitData.description : ""}</textarea>
                     </div>
                     <div className={styles.medicine}>
                         <div>
                             <label class="block mb-2 text-md font-medium text-gray-900 dark:text-gray-400">Medicine</label>
-                            <textarea id="message" name='medicine'  className="overflow-y-auto h-44 w-60 block p-2.5 text-lg text-gray-900 bg-gray-50 rounded-lg border border-gray-300">{visitData.medicine?visitData.medicine:"there is no medicine yet"}</textarea>
+                            <textarea id="message" name='medicine' placeholder="Please Dr. leave your comments here..."  className="overflow-y-auto h-44 w-60 block p-2.5 text-lg text-gray-900 bg-gray-50 rounded-lg border border-gray-300">{visitData.medicine?visitData.medicine:""}</textarea>
                         </div>
                         <div>
                             <label for="medicine_status" class="inline-flex relative items-center mr-5 cursor-pointer">
@@ -141,14 +141,14 @@ export default function DoctorVisit({ visitData }) {
                             <div className=''>
                                 
                                 
-                                <div id="message" class="mb-5 overflow-y-auto h-36 block p-2.5 w-96 text-lg text-gray-900 bg-gray-400 rounded-lg border border-gray-30 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" >
+                                <div id="message" class="mb-5 overflow-y-auto h-36 block p-2.5 w-96 text-lg text-gray-900 bg-gray-200 rounded-lg border border-gray-30 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" >
                                     {visitData.test_attachments?
                                 
                                 <div> {visitData.test_attachments.split(",").map(link=>{
                                     return(<span key={link} ><Link href={link}><span className='mr-5 text-lg underline cursor-pointer'>Test Link</span></Link></span>)
                                 }) 
                         
-                            }  </div>  : "there is no test_attachments provided yet"}</div>
+                            }  </div>  : "There is no test attachments provided yet"}</div>
                                 
                             
                          </div>
@@ -160,7 +160,7 @@ export default function DoctorVisit({ visitData }) {
 
                             <textarea id="x_ray" name='x_ray' rows="5" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Please Dr. leave your comments here...">{visitData.x_rays_description?visitData.x_rays_description:""}</textarea>
                             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 mt-5" for="xrays_files">Xray Results</label>
-                            <div id="x_ray" class="overflow-y-auto h-36 block p-2.5 w-96 text-lg text-gray-900 bg-gray-400 rounded-lg border border-gray-30 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" >
+                            <div id="x_ray" class="overflow-y-auto h-36 block p-2.5 w-96 text-lg text-gray-900 bg-gray-200 rounded-lg border border-gray-30 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" >
                                         
                                         {visitData.x_rays_attachments?
                                     
@@ -168,7 +168,7 @@ export default function DoctorVisit({ visitData }) {
                                             return(<span key={link} ><Link href={link}><span className='mr-5 text-lg underline cursor-pointer'>x_ray Link</span></Link></span>)
                                         }) 
                             
-                                        }  </div>  : "there is no x_rays_attachments provided yet"}
+                                        }  </div>  : "There is no x rays attachments provided yet"}
                                         </div>
 
         

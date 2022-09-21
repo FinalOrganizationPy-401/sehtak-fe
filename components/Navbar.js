@@ -1,4 +1,4 @@
-import React , {useState} from 'react';
+import React , {useState ,useEffect} from 'react';
 //Import Components
 import Link from 'next/link'
 import styles from '../styles/Navbar.module.css'
@@ -18,10 +18,15 @@ import { async } from '@firebase/util';
 
 export default function Navbar() {
     const { isAuth, logout } = useAuth();
+    const [Auth, setAuth] = useState(false);
     
     const router = useRouter();
-    const isLoggedIn = isAuth()
+    
 
+    useEffect(() => {
+    isAuth()?setAuth(true):setAuth(false)
+    }, []);
+    
     function handleLogout(e) {
         e.preventDefault();
         logout()
@@ -43,9 +48,9 @@ export default function Navbar() {
                         </DropdownButton>
                     </Dropdown>
                     {
-                        isLoggedIn ?
-                         <Link href='account/login'><div onClick={handleLogout} className={styles.whiteButtons}>Logout <FontAwesomeIcon icon={faSignOutAlt} /></div></Link> : 
-                         <Link href='account/login'><div className={styles.whiteButtons} ><FontAwesomeIcon icon={faSignInAlt} />Login</div></Link>
+                        Auth ?
+                         <Link href='account/login'><div onClick={handleLogout} className={styles.whiteButtons}>Logout <FontAwesomeIcon className='inline w-5' icon={faSignOutAlt} /></div></Link> : 
+                         <Link href='account/login'><div className={styles.whiteButtons} ><FontAwesomeIcon className='inline w-5' icon={faSignInAlt} />Login</div></Link>
                     }
                 </div>
 

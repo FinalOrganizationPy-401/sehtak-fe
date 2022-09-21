@@ -14,6 +14,7 @@ export default function PatientVisits() {
 
     const api = 'https://sehtak.herokuapp.com/api/v1/visits/'; 
     const token = JSON.parse(localStorage.getItem("AuthTokens")).access
+    
     const id_patient = jwt_decode(token).info_id
     const [patientData , setPatientData] = useState(null);
     const router = useRouter()
@@ -109,7 +110,7 @@ async function getProfileInfo() {
                     </td>
                     <td className="px-6 py-4">
                     {
-                        visit.visit_status == true  ?  <span className='p-2 text-black bg-green-400 rounded-md' >Opened</span>:<span className='p-2 text-black bg-gray-400 rounded-md' >Closed</span>
+                        visit.visit_status == true  ?  <span className='p-2 text-white bg-green-400 rounded-md' >Opened</span>:<span className='p-2 text-black bg-gray-400 rounded-md' >Closed</span>
                     }
                        
                         
