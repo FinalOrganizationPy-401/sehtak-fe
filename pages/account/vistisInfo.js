@@ -10,6 +10,7 @@ import PatientInfo from '../../components/ProfileComponents/Patient/PatientInfo'
 import PatientVisits from '../../components/ProfileComponents/Patient/PatientVisits'
 import ProUserInfo from '../../components/ProfileComponents/ProUsers/ProUserInfo'
 import ProUserVisits from '../../components/ProfileComponents/ProUsers/ProUserVisits'
+import { async } from '@firebase/util';
 
 
 
