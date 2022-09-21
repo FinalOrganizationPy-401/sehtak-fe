@@ -10,12 +10,14 @@ import PatientInfo from '../../components/ProfileComponents/Patient/PatientInfo'
 import PatientVisits from '../../components/ProfileComponents/Patient/PatientVisits'
 import ProUserInfo from '../../components/ProfileComponents/ProUsers/ProUserInfo'
 import ProUserVisits from '../../components/ProfileComponents/ProUsers/ProUserVisits'
-import { async } from '@firebase/util';
 
 
 
 
 export default function VistisInfo() {
+
+    const [auth, setauth] = useState(false);
+    
     const { isAuth } = useAuth();
     const isLoggedIn = isAuth()
     const router = useRouter();
@@ -24,11 +26,8 @@ export default function VistisInfo() {
 
 
     useEffect(() => {
-        if (!isLoggedIn) {
-            router.push('login?status=failed');
-            return
-        }
-    }, [isLoggedIn])
+        isAuth()?setauth(true): setauth(false);
+    }, [])
 
     const theBlueLine = "text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500 group"
     const theBlueText = "text-blue-600 dark:text-blue-500"
@@ -68,7 +67,7 @@ export default function VistisInfo() {
 
     return (
         <>
-            {isLoggedIn ?
+            {auth ?
                 <div className='h-screen backGroundCoverImage2'>
                     <Navbar />
 

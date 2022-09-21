@@ -14,6 +14,7 @@ export default function PatientVisits() {
 
     const api = 'https://sehtak.herokuapp.com/api/v1/visits/'; 
     const token = JSON.parse(localStorage.getItem("AuthTokens")).access
+    
     const id_patient = jwt_decode(token).info_id
     const [patientData , setPatientData] = useState(null);
     const router = useRouter()

@@ -58,35 +58,29 @@ export default function PharmasistVisit({visitData}) {
           
         const DataToUpdate ={
             medicine: e.target.medicine.value,
-            medicine_status: e.target.medicine_status.value,
+            medicine_status: IsSold
         }
-        console.log(DataToUpdate)
-        // try {
-        //     const res = await axios.put(visitUpdateUrl, DataToUpdate, config);
-        //     if (res.status === 400) {
-        //         console.log(`${res.status} bad request`)
-        //         NProgress.done()
-        //     }
-        //     if (res.status === 201 || res.status === 200) {
-        //         console.log('updated')
-        //         NProgress.done()
-        //         router.reload(window.location.pathname)
-        //     }
-        // }
-        // catch (error) {
-        //   console.log(` Error Signing in: ${error}`)
-        //   NProgress.done()
-        // }
+    
+        try {
+            const res = await axios.put(visitUpdateUrl, DataToUpdate, config);
+            if (res.status === 400) {
+                console.log(`${res.status} bad request`)
+                NProgress.done()
+            }
+            if (res.status === 201 || res.status === 200) {
+                console.log('updated')
+                NProgress.done()
+                router.reload(window.location.pathname)
+            }
+        }
+        catch (error) {
+          console.log(` Error Signing in: ${error}`)
+          NProgress.done()
+        }
     } 
 
 
 
-   async function onSubmitCloseVisit() {
-        if (confirm("Are You Sure That You Want To Close This Visit?") == true) {
-           await CloseVisit()
-           router.reload(window.location.pathname)
-        }
-    }
 
     return (
         <>
@@ -120,9 +114,13 @@ export default function PharmasistVisit({visitData}) {
                         </div>
                         <div>
                             <label for="medicine_status" class="inline-flex relative items-center mr-5 cursor-pointer">
-                                <input type="checkbox" name='medicine_status' id="medicine_status" class="sr-only peer" value={IsSold}/>
-                                    <div class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600"></div>
-                                    <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Sold to Patient</span>
+                                <input type="checkbox" name='medicine_status' id="medicine_status" class="sr-only peer" />
+                                {
+                                    visitData.medicine_status === false?
+                                    <><div class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600" onClick={(e)=>setIsSold(!IsSold)}></div><span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Sold to Patient</span></>:
+                                    <div className='px-2 text-white bg-green-500 rounded-md text-we'>Sold</div>
+                                }
+                                    
                             </label>
                         </div>
                         <div>
@@ -130,22 +128,9 @@ export default function PharmasistVisit({visitData}) {
                         </div>
                     </div>
                     <div >
-                        <div className='mb-5'>
-                            <label for="message" class="block mb-2 text-md font-medium text-gray-900 dark:text-gray-400">Tests</label>
-                            <div id="message" rows="9" class="mb-3 overflow-y-auto h-36 block p-2.5 w-full text-lg text-gray-900 bg-gray-50 rounded-lg border border-gray-30 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" >{visitData.test? visitData.test : "there is no tests provided yet"}</div>
-                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="user_avatar">Tests Results</label>
-                            <div id="message" class="overflow-y-auto h-36 block p-2.5 w-full text-lg text-gray-900 bg-red-500 rounded-lg border border-gray-30 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" >{visitData.test_attachments? visitData.test_attachments : "there is no test_attachments provided yet"}</div>
-                        </div>
-                        <div className='mb-5'>
-                        <label for="message" class="block mb-2 text-md font-medium text-gray-900 dark:text-gray-400">X-Rays</label>
-                            <div id="message" rows="9" class="mb-3 overflow-y-auto h-36 block p-2.5 w-full text-lg text-gray-900 bg-gray-50 rounded-lg border border-gray-30 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" >{visitData.x_rays_description? visitData.x_rays_description : "there is no X-rays provided yet"}</div>
-                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="user_avatar">X-Rays Results</label>
-                            <div id="message" class="overflow-y-auto h-36 block p-2.5 w-full text-lg text-gray-900 bg-red-500 rounded-lg border border-gray-30 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" >{visitData.x_rays_attachments? visitData.x_rays_attachments : "there is no x_rays_attachments provided yet"}</div>
-        
-                            </div>
+
                         <div className={styles.buttons}>
                             <button type='submit' className={styles.buttonSave}>Save</button>
-                            <button onClick={onSubmitCloseVisit} className={styles.buttonClose}>Close Visit</button>
                         </div>
                         
                     </div>
