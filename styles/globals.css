@@ -4,7 +4,7 @@
 
 .backGroundCoverImage{
     background-image:url('/images/login_bg.jpeg');
-    background-size:cover ;
+    background-size:cover;
 }
 .main{
     background-image: url('/images/bg_card1.jpg');

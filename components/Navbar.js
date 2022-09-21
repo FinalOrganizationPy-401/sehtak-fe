@@ -1,3 +1,4 @@
+import React , {useState} from 'react';
 //Import Components
 import Link from 'next/link'
 import styles from '../styles/Navbar.module.css'
@@ -12,12 +13,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // get our fontawesome imports
 import {  faSignIn, faSignInAlt, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { async } from '@firebase/util';
 
 
 export default function Navbar() {
     const { isAuth, logout } = useAuth();
-    const isLoggedIn = isAuth()
+    
     const router = useRouter();
+    let isLoggedIn = false
+   async function checkingIsLog(){
+        isLoggedIn = await isAuth()
+   }
+   checkingIsLog()
 
     function handleLogout(e) {
         e.preventDefault();
@@ -27,16 +34,10 @@ export default function Navbar() {
     return (
         <>
             <div className={styles.container}>
-                <div>
-                    <Image src='/images/logo.png' alt='' width='210' height='80' />
-                </div>
+                <div><Image src='/images/logo.png' alt='' width='210' height='80' /></div>
                 <div className={styles.container}>
-                    <div className={styles.items}>
-                        <Link href='/'><a className={styles.item}>Home</a></Link>
-                    </div>
-                    <div>
-                        <Link href='/account/vistisInfo'><a className={styles.item}>Profile</a></Link>
-                    </div>
+                    <div className={styles.items}><Link href='/'><a className={styles.item}>Home</a></Link></div>
+                    <div><Link href='/account/vistisInfo'><a className={styles.item}>Profile</a></Link></div>
                     <Dropdown>
                         <DropdownButton id="dropdown-basic-button" title="Medical Centers">
                             <Dropdown.Item href="/Doctors/Doctors">Doctors</Dropdown.Item>
@@ -46,8 +47,9 @@ export default function Navbar() {
                         </DropdownButton>
                     </Dropdown>
                     {
-
-                        isLoggedIn ? <Link href='account/login'><button onClick={handleLogout} className={styles.whiteButtons}>Logout <span><FontAwesomeIcon icon={faSignOutAlt} /></span></button></Link> : <Link href='account/login'><button className={styles.whiteButtons}>Login <span><FontAwesomeIcon icon={faSignInAlt} /></span></button></Link>
+                        isLoggedIn ?
+                         <Link href='account/login'><div onClick={handleLogout} className={styles.whiteButtons}>Logout <FontAwesomeIcon icon={faSignOutAlt} /></div></Link> : 
+                         <Link href='account/login'><div className={styles.whiteButtons} ><FontAwesomeIcon icon={faSignInAlt} />Login</div></Link>
                     }
                 </div>
 
