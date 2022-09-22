@@ -50,7 +50,7 @@ export default function Navbar() {
                     {
                         Auth ?
                          <Link href='account/login'><div onClick={handleLogout} className={styles.whiteButtons}>Logout <FontAwesomeIcon className='inline w-5' icon={faSignOutAlt} /></div></Link> : 
-                         <Link href='account/login'><div className={styles.whiteButtons} ><FontAwesomeIcon className='inline w-5' icon={faSignInAlt} />Login</div></Link>
+                         <Link href='account/login'><div className={styles.whiteButtons} >Login</div></Link>
                     }
                 </div>
 
