@@ -85,22 +85,28 @@ const DoctorsTable = () =>{
             subHeaderAlign="left"
             subHeaderComponent ={
             <>
-            <input 
-                type='text'
-                placeholder='Search by Name'
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                value={search}
-                onChange={(e)=> setSearch(e.target.value)}
-                />
-            <Image src='/images/search.jpg' alt='' width='45' height='45' />
+            <div className="flex justify-around w-full">
+                <div className="flex h-11">
+                    <input 
+                        type='text'
+                        placeholder='Search by Name'
+                        class="ml-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        value={search}
+                        onChange={(e)=> setSearch(e.target.value)}
+                        />
+                    <Image src='/images/search.jpg' alt='' width='45' height='45' class="rounded-md" />
+                </div>
+            <div class="flex h-11">
             <input 
                 type='text'
                 placeholder='Search by City'
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                class="ml-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 value={searchCity}
                 onChange={(e)=> setSearchCity(e.target.value)}
                 />
-            <Image src='/images/location.jpg' alt='' width='45' height='45' />
+            <Image src='/images/location.jpg' alt='' width='45' height='45'class="rounded-md" />
+            </div>
+            </div>
             </>
         }
         />
